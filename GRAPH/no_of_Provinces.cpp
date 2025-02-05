@@ -33,6 +33,14 @@ void dfs(int s, vector<vector<int>> &adjls, vector<int> &vis) {
     }
 }
 
+// Space and Time of
+// Space complexity = (space for vis[] array + recursion stack space worst case O(n))
+//                  = O(n) + O(n) ~~ O(n)
+
+// Time Complexity  = function will be called for each node once and each time for loop will run for degree of that selectd node
+//                  we already know graphs total degree = 2*E or (2 * no of edges)
+//                  = O(n) + O(2E) ---> Undirected Graph
+//                  = O(n) + O(E)  ---> Directed Graph
 void noOfProvinces(vector<vector<int>> &adjls, int n) {
     int cnt = 0;
     vector<int> vis (n+1, 0);

@@ -10,3 +10,7 @@ Ways to represent graphs:
 
 Graph traversal: 
 BFS(Breadth first search): travel level-wise through the entire graph
+DFS(Depth first search): traval depth wise through all nodes
+
+No of Provinces: no of components of a graph
+
