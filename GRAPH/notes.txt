@@ -1,0 +1,12 @@
+Graph: represented using nodes and edges (V,E) or (n,m)
+Types: Undirected and Directed graphs
+Weihted graphs: edges have some weight or cost
+Connected Components: A graph can contain components that are individual graphs.
+Ways to represent graphs:
+    Adjecency Matrix: size (n+1, m+1)
+                    space complexity: (n+1)*(m+1) --> high
+    Adjecency list: Array of vector where vector contains the adjecent nodes.
+                    syntax: vector<int> graph[n];
+
+Graph traversal: 
+BFS(Breadth first search): travel level-wise through the entire graph
