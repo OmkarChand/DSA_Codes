@@ -4,6 +4,23 @@
 
 using namespace std;
 
+void dfs(int row, int col, vector<vector<char>>& grid, vector<vector<int>>& vis) {
+    vis[row][col] = 1;
+    int n = grid.size();
+    int m = grid[0].size();
+    for (int delrow = -1; delrow <= 1; delrow++) {
+        for (int delcol = -1; delcol <= 1; delcol++) {
+            int nrow = row + delrow;
+            int ncol = col + delcol;
+
+            if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m
+            && grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
+                dfs(nrow, ncol, grid, vis);
+            }
+        }
+    }
+}
+
 void bfs(int row, int col, vector<vector<char>>& grid, vector<vector<int>>& vis) {
     vis[row][col] = 1;
     queue<pair<int,int>> q;
@@ -48,7 +65,9 @@ void numIslands(vector<vector<char>>& grid) {
         for(int col = 0; col < m; col++) {
             if(!vis[row][col] && grid[row][col] == '1') {
                 cnt++;
-                bfs(row, col, grid, vis);
+                // you can use any one of them (bfs, dfs)
+                // bfs(row, col, grid, vis);
+                dfs(row, col, grid, vis);
             }
         }
     }
@@ -68,12 +87,21 @@ int main() {
             cin >> grid[i][j];
         }
     }
-
+    // BFS
     // Space complexity : SC = space for vis array + queue space
     //                       = O(n^2) + O(n^2)
     //                       = O(n^2)
 
     // Time complexity : TC = for matrix inorder to check for land ('1') + number of time you calls bfs worst case when all are lands
+    //                      = O(n^2) + O(n^2)*9
+    //                      = O(n^2)
+
+    // DFS
+    // Space complexity : SC = space for vis array + stack space
+    //                       = O(n^2) + O(n^2)
+    //                       = O(n^2)
+
+    // Time complexity : TC = for matrix inorder to check for land ('1') + number of time you calls dfs worst case when all are lands
     //                      = O(n^2) + O(n^2)*9
     //                      = O(n^2)
     numIslands(grid);
