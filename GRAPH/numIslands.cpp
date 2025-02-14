@@ -36,7 +36,8 @@ void bfs(int row, int col, vector<vector<char>>& grid, vector<vector<int>>& vis)
 }
 
 // No of Islands or Connected component
-// Note: Input is given in the form of 2d matrix and from the node you can travel the neighbours diagonally, vertically and horizontly
+// Note: Input is given in the form of 2d matrix and 
+// from the node you can travel the neighbours diagonally, vertically and horizontly
 void numIslands(vector<vector<char>>& grid) {
     int n = grid.size();
     int m = grid[0].size();
@@ -68,6 +69,13 @@ int main() {
         }
     }
 
+    // Space complexity : SC = space for vis array + queue space
+    //                       = O(n^2) + O(n^2)
+    //                       = O(n^2)
+
+    // Time complexity : TC = for matrix inorder to check for land ('1') + number of time you calls bfs worst case when all are lands
+    //                      = O(n^2) + O(n^2)*9
+    //                      = O(n^2)
     numIslands(grid);
 
     // cout << "Print the grid: " << endl;
