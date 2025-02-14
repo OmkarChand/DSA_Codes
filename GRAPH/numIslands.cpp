@@ -1,15 +1,42 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 
 using namespace std;
 
-void dfs(int row, int col, vect0r<vector<chat>>& grid, vector<vector<int>>& vis) {
-    stack<pair<int,int>>> st;
+void bfs(int row, int col, vector<vector<char>>& grid, vector<vector<int>>& vis) {
+    vis[row][col] = 1;
+    queue<pair<int,int>> q;
+    q.push({row, col});
+    int n = grid.size();
+    int m = grid[0].size();
+
+    while(!q.empty()) {
+        int row = q.front().first;
+        int col = q.front().second;
+        q.pop();
+
+        // traverse the neighbours and mark them if its a land
+        // delrow / delcol -> delta row/column 
+        // nrow / ncol--> neighbour row/col
+        for(int delrow = -1; delrow <= 1; delrow++) {
+            for(int delcol = -1; delcol <= 1; delcol++) {
+                int nrow = row + delrow;
+                int ncol = col + delcol;
+
+                if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m 
+                    && grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
+                        vis[nrow][ncol] = 1;
+                        q.push({nrow, ncol});
+                }
+            }
+        }
+    }
     
 }
 
 // No of Islands or Connected component
-// Note: Input is given in the form of 2d matrix and from one node you can travel diagonally, vertically and horizontly
+// Note: Input is given in the form of 2d matrix and from the node you can travel the neighbours diagonally, vertically and horizontly
 void numIslands(vector<vector<char>>& grid) {
     int n = grid.size();
     int m = grid[0].size();
@@ -18,13 +45,13 @@ void numIslands(vector<vector<char>>& grid) {
 
     for(int row = 0; row < n; row++) {
         for(int col = 0; col < m; col++) {
-            if(!vis[row][col]) {
+            if(!vis[row][col] && grid[row][col] == '1') {
                 cnt++;
-                dfs(row, col, grid, vis);
+                bfs(row, col, grid, vis);
             }
         }
     }
-    cout << "Number of Islands/Connected components = " << cnt;
+    cout << "Number of Islands/Connected components = " << cnt << endl;
 }
 
 int main() {
